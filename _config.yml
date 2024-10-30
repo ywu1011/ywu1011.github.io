@@ -1,5 +1,5 @@
 title: Wendy Wu
 description: A template for your AOS C111/204 project site.
-logo: /assets/IMG/template_logo.png
+logo: /assets/img/logo.png
 show_downloads: true
-theme: jekyll-theme-modernist
+theme:  jekyll-theme-minimal
