@@ -1,6 +1,14 @@
 ## My Project
 
-I applied machine learning techniques to investigate... Below is my report.
+Wendy Wu
+
+Department of Atmospheric and Oceanic Sciences, UCLA
+
+AOS C204: Introduction to Machine Learning for the Physical Sciences
+
+Dr. Alexander Lozinski
+
+December 6, 2024
 
 ***
 
