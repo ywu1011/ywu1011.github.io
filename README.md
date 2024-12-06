@@ -204,9 +204,8 @@ In this analysis, we employed various machine learning models to predict credit 
 `Random Forest` emerges as the best-performing model based on the current results, with the highest AUC and balanced metrics for both classes. However, `XGBoost` has the potential to surpass Random Forest with optimized hyperparameters, especially for imbalanced datasets. `Ridge Regression`, while underperforming in this context, remains a viable baseline model due to its simplicity and interpretability. Future work should focus on addressing class imbalance and exploring advanced boosting techniques to improve minority class performance further.
 
 ## References
-[^1]: [Ghatasheh, N. (2014). Business analytics using random forest trees for credit risk prediction: a comparison study. International Journal of Advanced Science and Technology, 72(2014), 19-30.]
 
-[^2]: [Pandey, T. N., Jagadev, A. K., Mohapatra, S. K., & Dehuri, S. (2017, August). Credit risk analysis using machine learning classifiers. In 2017 International Conference on Energy, Communication, Data Analytics and Soft Computing (ICECDS) (pp. 1850-1854). IEEE.]
-
-[^3]: [Shi, S., Tse, R., Luo, W., D’Addona, S., & Pau, G. (2022). Machine learning-driven credit risk: a systemic review. Neural Computing and Applications, 34(17), 14327-14339.]
+[^1]: Pandey, T. N., Jagadev, A. K., Mohapatra, S. K., & Dehuri, S. (2017, August). Credit risk analysis using machine learning classifiers. In 2017 International Conference on Energy, Communication, Data Analytics and Soft Computing (ICECDS) (pp. 1850-1854). IEEE.
+[^2]: Shi, S., Tse, R., Luo, W., D’Addona, S., & Pau, G. (2022). Machine learning-driven credit risk: a systemic review. Neural Computing and Applications, 34(17), 14327-14339.
+[^3]: Ghatasheh, N. (2014). Business analytics using random forest trees for credit risk prediction: a comparison study. International Journal of Advanced Science and Technology, 72(2014), 19-30.
 
