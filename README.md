@@ -43,6 +43,7 @@ Here is a detalied description of the attributes in each column:
 ![](assets/IMG/basicinfo.png)
 ![](assets/IMG/einfo.png)
 ![](assets/IMG/loaninfo.png)
+![](assets/IMG/purpose.png)
 *Figure 1:Distribution of all the Variables in the Dataset*
 
 Before putting the attributes into the models, I did some processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the NaN values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
