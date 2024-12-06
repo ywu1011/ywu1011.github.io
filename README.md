@@ -24,7 +24,7 @@ Here I used an adaption of the dataset from Kaggle(https://www.kaggle.com/datase
 
 ![](assets/IMG/form.png)
 
-*Table 1: Decision attributes used for evaluating credit risk in the German credit dataset.*
+#### Table 1: Decision attributes used for evaluating credit risk in the German credit dataset.*
 
 Here is a detalied description of the attributes in each column:
 
@@ -44,7 +44,7 @@ Here is a detalied description of the attributes in each column:
 ![](assets/IMG/einfo.png)
 ![](assets/IMG/loaninfo.png)
 ![](assets/IMG/purpose.png)
-*Figure 1:Distribution of all the Variables in the Dataset*
+#### Figure 1: Distribution of all the Variables in the Dataset
 
 Before putting the attributes into the models, I did some processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the NaN values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
 
@@ -53,7 +53,7 @@ Before putting the attributes into the models, I did some processing. To handle 
 
 I used three different machine learning approaches: `Ridge regression`, `Random Forest` and `XGBoost(eXtreme Gradient Boosting) algorithm` to evaluate the lenders' credit risks. 
 
-*Ridge regression Model*
+#### Ridge regression Model
 ```python
 from sklearn.linear_model import Ridge
 ConfusionMatrixDisplay
@@ -62,7 +62,7 @@ model_lr.fit(X_train, y_train)
 y_pred_lr = model_lr.predict(X_test)
 ```
 
-*Random Forest Model*
+#### Random Forest Model
 ```python
 from sklearn.ensemble import RandomForestRegressor
 model_rf = RandomForestRegressor(n_estimators=100, oob_score = True)
@@ -70,7 +70,7 @@ model_rf.fit(X_train, y_train)
 y_pred_rf = model_rf.predict(X_test)
 ```
 
-*XGBoost Model*
+#### XGBoost Model
 ```python
 from xgboost import XGBClassifier
 model_xgb = XGBClassifier()
@@ -112,7 +112,8 @@ weighted avg       0.66      0.71      0.65       300
 ```
 ![](assets/IMG/RRCM.png)
 
-*Figure 2:Confusion Matrix for Ridge regression*
+#### Figure 2: Confusion Matrix for Ridge regression
+
 The model performs better at predicting "good" credit risks but struggles with "bad" credit risks, as indicated by the low recall for the "bad" class. Also, this model is predicting more false positives (72) than false negatives (16), indicating that the model is more likely to predict bad credit cases as good credit as well. 
 
 Next, I ran the Random Forest model. The model achieved an accuracy of 76.3%, which is a slight improvement over the Ridge Regression model's accuracy of 71%.
@@ -131,11 +132,11 @@ The Random Forest significantly improves the performance for Class 1 (bad credit
 
 ![](assets/IMG/RFCM.png)
 
-*Figure 3:Confusion Matrix for Random Forest*
+#### Figure 3: Confusion Matrix for Random Forest
 
 ![](assets/IMG/FeatureIm.png)
 
-*Figure 4:Feature Importance for Random Forest*
+#### Figure 4: Feature Importance for Random Forest
 
 The Random Forest model also performs significantly better for the majority class (Class 0--good credit), as expected given the class imbalance. This imbalance makes it easier for the model to perform well on the majority class (good credit), but harder to achieve strong performance on the minority class (bad credit). While it improves over Ridge Regression in identifying bad credit cases (48 vs. 15 of True Negatives), the recall for bad credit (0.55) still leaves room for improvement.
 
@@ -156,11 +157,11 @@ weighted avg       0.76      0.76      0.76       300
 ```
 ![](assets/IMG/XGCM.png)
 
-*Figure 4:Confusion Matrix for XGboost Model*
+#### Figure 5: Confusion Matrix for XGboost Model
 
 Random Forest achieves the highest AUC (0.80), indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
 ![](assets/IMG/ROC.png)
-*Figure 5:ROC Curves for Rdige regression, Random Forest and XGboost Models*
+*Figure 5: ROC Curves for Rdige regression, Random Forest and XGboost Models*
 
 
 ## Discussion
@@ -187,4 +188,3 @@ Random Forest emerges as the best-performing model based on the current results,
 
 [^2]: [Shi, S., Tse, R., Luo, W., D’Addona, S., & Pau, G. (2022). Machine learning-driven credit risk: a systemic review. Neural Computing and Applications, 34(17), 14327-14339.]
 
-[back](./)
