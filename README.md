@@ -41,8 +41,8 @@ Here is a detalied description of the attributes in each column:
 
 
 ![](assets/IMG/basicinfo.png)
-![](assets/IMG/e info.png)
-![](assets/IMG/loan info.png)
+![](assets/IMG/einfo.png)
+![](assets/IMG/loaninfo.png)
 *Figure 1:Distribution of all the Variables in the Dataset*
 
 Before putting the attributes into the models, I did some processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the NaN values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
@@ -50,8 +50,9 @@ Before putting the attributes into the models, I did some processing. To handle 
 
 ## Modelling
 
-I used three different machine learning approaches: Ridge regression, Random Forest and XGBoost(eXtreme Gradient Boosting) algorithm to evaluate the lenders' credit risks. 
+I used three different machine learning approaches: `Ridge regression`, `Random Forest` and `XGBoost(eXtreme Gradient Boosting) algorithm` to evaluate the lenders' credit risks. 
 
+*Ridge regression Model*
 ```python
 from sklearn.linear_model import Ridge
 ConfusionMatrixDisplay
@@ -59,37 +60,40 @@ model_lr = Ridge(alpha=1.0)
 model_lr.fit(X_train, y_train)
 y_pred_lr = model_lr.predict(X_test)
 ```
-*Ridge regression Model*
 
+*Random Forest Model*
 ```python
 from sklearn.ensemble import RandomForestRegressor
 model_rf = RandomForestRegressor(n_estimators=100, oob_score = True)
 model_rf.fit(X_train, y_train)
 y_pred_rf = model_rf.predict(X_test)
 ```
-*Random Forest Model*
 
+*XGBoost Model*
 ```python
 from xgboost import XGBClassifier
 model_xgb = XGBClassifier()
 model_xgb.fit(X_train, y_train)
 y_pred_xgb = model_xgb.predict(X_test)
 ```
-*XGBoost Model*
+
 
 Meanwhile, I evaluated the models' performance using accuracy, confusion matrix, and classification report. This step is essential for understanding how well these models are predicting credit risk and identifying areas for improvement.
 
 ```python
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 ```
-Accuracy: The model achieved an accuracy of 74%, which means it correctly predicted the credit risk status of 74% of the test samples.
+* `Accuracy`: The model achieved an accuracy of 74%, which means it correctly predicted the credit risk status of 74% of the test samples.
 
-Confusion Matrix: The confusion matrix shows how many actual instances of each class were correctly or incorrectly classified.
+* `Confusion Matrix`: The confusion matrix shows how many actual instances of each class were correctly or incorrectly classified.
 
-Classification Report:
-Precision: Measures the accuracy of positive predictions.
-Recall: Measures the ability to identify positive instances.
-F1-Score: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
+* `Classification Report`:
+
+`Precision`: Measures the accuracy of positive predictions.
+
+`Recall`: Measures the ability to identify positive instances.
+
+`F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
 
 
 ## Results
@@ -105,7 +109,8 @@ Ridge Regression Classification Report:
    macro avg       0.61      0.55      0.54       300
 weighted avg       0.66      0.71      0.65       300
 ```
-![](assets/IMG/datapenguin.png){: width="500" }
+![](assets/IMG/RRCM.png)
+
 *Figure 2:Confusion Matrix for Ridge regression*
 The model performs better at predicting "good" credit risks but struggles with "bad" credit risks, as indicated by the low recall for the "bad" class. Also, this model is predicting more false positives (72) than false negatives (16), indicating that the model is more likely to predict bad credit cases as good credit as well. 
 
@@ -122,10 +127,15 @@ Random Forest Classification Report:
 weighted avg       0.76      0.76      0.76       300
 ```
 The Random Forest significantly improves the performance for Class 1 (bad credit), particularly in terms of recall and F1-score.
-![](assets/IMG/datapenguin.png){: width="500" }
-*Figure 3:Confusion Matrix*
-![](assets/IMG/datapenguin.png){: width="500" }
+
+![](assets/IMG/RFCM.png)
+
+*Figure 3:Confusion Matrix for Random Forest*
+
+![](assets/IMG/FeatureIm.png)
+
 *Figure 4:Feature Importance for Random Forest*
+
 The Random Forest model also performs significantly better for the majority class (Class 0--good credit), as expected given the class imbalance. This imbalance makes it easier for the model to perform well on the majority class (good credit), but harder to achieve strong performance on the minority class (bad credit). While it improves over Ridge Regression in identifying bad credit cases (48 vs. 15 of True Negatives), the recall for bad credit (0.55) still leaves room for improvement.
 
 Considering the imbalanced dataset, I use another model---- XGBoost expecting that it might better handle class imbalance and improve minority class performance.
@@ -143,19 +153,24 @@ XGBoost Model Classification Report:
    macro avg       0.71      0.70      0.70       300
 weighted avg       0.76      0.76      0.76       300
 ```
-![](assets/IMG/datapenguin.png){: width="500" }
+![](assets/IMG/XGCM.png)
+
 *Figure 4:Confusion Matrix for XGboost Model*
 
 Random Forest achieves the highest AUC (0.80), indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
-![](assets/IMG/datapenguin.png){: width="500" }
+![](assets/IMG/ROC.png)
 *Figure 5:ROC Curves for Rdige regression, Random Forest and XGboost Models*
 
 
 ## Discussion
 The evaluation of three different models—Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
-Ridge Regression is a simple, interpretable model but lacks the capacity to handle non-linearities or complex patterns in the data.
-Random Forest strikes a balance between simplicity and performance, excelling in capturing feature interactions.
-XGBoost, while currently underperforming, has the potential to outperform with proper tuning and is often favored for large-scale, high-dimensional datasets.
+
+* `Ridge Regression` is a simple, interpretable model but lacks the capacity to handle non-linearities or complex patterns in the data.
+
+* `Random Forest` strikes a balance between simplicity and performance, excelling in capturing feature interactions.
+
+* `XGBoost`, while currently underperforming, has the potential to outperform with proper tuning and is often favored for large-scale, high-dimensional datasets.
+
 All models show difficulties in predicting the minority class, particularly Ridge Regression. While Random Forest and XGBoost perform better, additional techniques like SMOTE (Synthetic Minority Oversampling Technique) or hyperparameter tuning (e.g., scale_pos_weight) could further improve results.
 
 
