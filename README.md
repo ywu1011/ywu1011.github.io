@@ -24,7 +24,7 @@ Here I used an adaption of the dataset from Kaggle(https://www.kaggle.com/datase
 
 ![](assets/IMG/form.png)
 
-#### Table 1: Decision attributes used for evaluating credit risk in the German credit dataset.*
+#### Table 1: Decision attributes used for evaluating credit risk in the German credit dataset.
 
 Here is a detalied description of the attributes in each column:
 
@@ -90,11 +90,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 * `Classification Report`:
 
-`Precision`: Measures the accuracy of positive predictions.
+   `Precision`: Measures the accuracy of positive predictions.
 
-`Recall`: Measures the ability to identify positive instances.
+   `Recall`: Measures the ability to identify positive instances.
 
-`F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
+   `F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
 
 
 ## Results
@@ -135,7 +135,6 @@ The Random Forest significantly improves the performance for Class 1 (bad credit
 #### Figure 3: Confusion Matrix for Random Forest
 
 ![](assets/IMG/FeatureIm.png)
-
 #### Figure 4: Feature Importance for Random Forest
 
 The Random Forest model also performs significantly better for the majority class (Class 0--good credit), as expected given the class imbalance. This imbalance makes it easier for the model to perform well on the majority class (good credit), but harder to achieve strong performance on the minority class (bad credit). While it improves over Ridge Regression in identifying bad credit cases (48 vs. 15 of True Negatives), the recall for bad credit (0.55) still leaves room for improvement.
@@ -161,7 +160,7 @@ weighted avg       0.76      0.76      0.76       300
 
 Random Forest achieves the highest AUC (0.80), indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
 ![](assets/IMG/ROC.png)
-*Figure 5: ROC Curves for Rdige regression, Random Forest and XGboost Models*
+#### Figure 6: ROC Curves for Rdige regression, Random Forest and XGboost Models
 
 
 ## Discussion
