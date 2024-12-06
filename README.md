@@ -22,9 +22,9 @@ With the rapid development of Artificial Intelligence (AI) technology, its appli
 The German Credit dataset used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes prepared by Prof. Hofmann which is publicly available at the University of California, Irvine (UCI) Machine Learning Repository. In this dataset, each entry represents a person who takes a credit by a bank. Each person is classified as good or bad credit risks according to the set of attributes. The link to the original dataset can be found below. 
 Here I used an adaption of the dataset from Kaggle(https://www.kaggle.com/datasets/uciml/german-credit/data) which contains 1000 entries with 10 categorial/numeric attributes (see Table 1). What need to be mentioned is that the dataset has a 7:3 ratio of good credit to bad credit of 'Risk' attribute.
 
-![](assets/IMG/form.png){: width="500" }
+![](assets/IMG/form.png)
 
-*Table 1:Decision attributes used for evaluating credit risk in the German credit dataset.*
+*Table 1: Decision attributes used for evaluating credit risk in the German credit dataset.*
 
 Here is a detalied description of the attributes in each column:
 
@@ -39,8 +39,10 @@ Here is a detalied description of the attributes in each column:
 * `Purpose` (text: car, furniture/equipment, radio/TV, domestic appliances, repairs, education, business, vacation/others)
 * `Risk`- **our target**
 
-Figure 1 illustrates the distribution of all the variables.
-![](assets/IMG/datapenguin.png){: width="500" }
+
+![](assets/IMG/basicinfo.png)
+![](assets/IMG/e info.png)
+![](assets/IMG/loan info.png)
 *Figure 1:Distribution of all the Variables in the Dataset*
 
 Before putting the attributes into the models, I did some processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the NaN values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
