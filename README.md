@@ -1,4 +1,4 @@
-## My Project
+## Final Project: Credit Risk Prediction with Random Forest
 
 Wendy Wu
 
