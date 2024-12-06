@@ -16,11 +16,11 @@ December 6, 2024
 
 Credit and trust are crucial to contemporary financial systems. A key metric for calculating and forecasting a debtor's default possibilities is credit risk. The accurate assessment of credit risk is significant for the entire system. Sometimes just a small enhancement to the evaluation system can undo a huge amount of losses [^2] while systemic failures such as the 2008 sub-prime crisis can result from inaccurate credit risk assessment. Therefore, in order to create suitable lending strategies that reduce their risks, lenders dedicate significant efforts to predicting the creditworthiness of businesses and customers. In the past, statistical techniques like logistic regression and linear discriminant analysis have been used in credit risk assessments [^3]. However, these strategies are not well-suited to large datasets.
 
-With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as `decision trees`, `surport vector machines`, and `K-means clustering` are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data of the lenders and identify the potential high-risk customers, and this is the topic I seek to explore in this paper.
+With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as `Decision Trees`, `Surport Vector Machines`, and `K-means clustering` are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data of the lenders and identify the potential high-risk customers, and this is the topic I seek to explore in this paper.
 
 ## Data
-The `German Credit dataset` used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes prepared by Prof. Hofmann which is publicly available at the [University of California, Irvine (UCI) Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data). In this dataset, each entry represents a person who takes a credit by a bank. Each person is classified as good or bad credit risks according to the set of attributes. The link to the original dataset can be found below. 
-Here I used an adaption of the dataset from [Kaggle](https://www.kaggle.com/datasets/uciml/german-credit/data) which contains 1000 entries with 10 categorial/numeric attributes (see Table 1). What need to be mentioned is that the dataset has a 7:3 ratio of good credit to bad credit of `Risk` attribute.
+The `German Credit dataset` used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes which is publicly available at the [University of California, Irvine (UCI) Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data). In this dataset, each entry represents a person who takes a credit by a bank. Each person is classified as good or bad credit risks according to the set of attributes. 
+Here I used an adaption of the dataset from [Kaggle](https://www.kaggle.com/datasets/uciml/german-credit/data) which contains 1000 entries with 10 categorial/numeric attributes (see Table 1). It is worth mentioning that the dataset has a 7:3 ratio of good credit to bad credit of `Risk` attribute.
 
 ![](assets/IMG/form.png)
 
@@ -40,7 +40,7 @@ Here is a detalied description of the attributes in each column:
 * `Risk`- **our target**
 
 
-![Average RGB values](assets/IMG/basicinfo.png)
+![](assets/IMG/basicinfo.png)
 
 ![](assets/IMG/einfo.png)
 
@@ -81,28 +81,27 @@ model_xgb.fit(X_train, y_train)
 y_pred_xgb = model_xgb.predict(X_test)
 ```
 
-
-Meanwhile, I evaluated the models' performance using accuracy, confusion matrix, and classification report. This step is essential for understanding how well these models are predicting credit risk and identifying areas for improvement.
+Meanwhile, I evaluated the three models' performance using accuracy, confusion matrix, and classification report. This step is essential for understanding how well these models are predicting credit risk and identifying areas for improvement.
 
 ```python
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 ```
-* `Accuracy`: The model achieved an accuracy of 74%, which means it correctly predicted the credit risk status of 74% of the test samples.
+* `Accuracy`: It can reflect the percentage of correctly predicting the credit risk status of the test samples.
 
 * `Confusion Matrix`: The confusion matrix shows how many actual instances of each class were correctly or incorrectly classified.
 
 * `Classification Report`:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Precision`: Measures the accuracy of positive predictions.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Precision`: Measures the accuracy of positive predictions.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Recall`: Measures the ability to identify positive instances.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Recall`: Measures the ability to identify positive instances.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
 
 
 ## Results
 ### Ridge regression Model
-First, I ran the Ridge regression model, obtaining a test accuracy of 70.67%. Below is the classification reportconfusion along with the confusion matrix for this model(Figure.2):
+First, I ran the Ridge regression model, obtaining a test accuracy of 70.67%. Below is the classification report along with the confusion matrix for this model (Figure 2):
 ```python
 Ridge Regression Classification Report:
                precision    recall  f1-score   support
@@ -120,11 +119,11 @@ weighted avg       0.66      0.71      0.65       300
 
 #### Figure 2: Confusion Matrix for Ridge regression
 
-The model performs better at predicting "good" credit risks but struggles with "bad" credit risks, as indicated by the low recall for the "bad" class. Also, this model is predicting more `false positives (72)` than `false negatives (16)`, indicating that the model is more likely to predict bad credit cases as good credit as well. 
+The Ridge regression model performs better at predicting "good" credit risks but struggles with "bad" credit risks, as indicated by the low recall for the "bad" class. Also, this model is predicting more `false positives (72)` than `false negatives (16)`, indicating that the model is more likely to predict bad credit cases as good credit. 
 
 ### Random Forest Model
 
-Next, I ran the Random Forest model. The model achieved an accuracy of 76.3%, which is a slight improvement over the Ridge Regression model's accuracy of 71%.
+Next, I ran the Random Forest model. The model achieved an accuracy of 76.3%, which is a slight improvement over the Ridge Regression model's accuracy of 71%. This model significantly improves the performance for Class 1 (bad credit), particularly in terms of recall and F1-score.
 ```python
 Random Forest Classification Report:
                precision    recall  f1-score   support
@@ -136,7 +135,7 @@ Random Forest Classification Report:
    macro avg       0.71      0.70      0.71       300
 weighted avg       0.76      0.76      0.76       300
 ```
-The Random Forest significantly improves the performance for Class 1 (bad credit), particularly in terms of recall and F1-score.
+While the Random Forest model improves over Ridge Regression in identifying bad credit cases `(48 vs. 15 of True Negatives)`, the `recall for bad credit (0.55)` still leaves room for improvement.
 
 <div align="center">
     <img src="assets/IMG/RFCM.png" alt="RFCM" width="400">
@@ -144,13 +143,15 @@ The Random Forest significantly improves the performance for Class 1 (bad credit
 
 #### Figure 3: Confusion Matrix for Random Forest
 
+I also plot the figure of feature importance for Random Forest Model(Figure 4). Predictably，`Credit amount` is the most important feature for credit risk assessment.
+
 <div align="center">
     <img src="assets/IMG/FeatureIm.png" alt="FeatureIm" width="600">
 </div>
 
 #### Figure 4: Feature Importance for Random Forest
 
-The Random Forest model also performs significantly better for the majority class (Class 0--good credit), as expected given the class imbalance. This imbalance makes it easier for the model to perform well on the majority class (good credit), but harder to achieve strong performance on the minority class (bad credit). While it improves over Ridge Regression in identifying bad credit cases (48 vs. 15 of True Negatives), the recall for bad credit (0.55) still leaves room for improvement.
+The Random Forest model also performs significantly better for the majority class (Class 0--good credit), as expected given the class imbalance. This imbalance makes it easier for the model to perform well on the majority class (good credit), but harder to achieve strong performance on the minority class (bad credit). 
 
 ### XGBoost Model
 
