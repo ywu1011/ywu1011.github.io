@@ -1,4 +1,4 @@
-## Final Project: Credit Risk Prediction with Random Forest
+## Final Project: Machine Learning Models to Predict Credit Risk
 
 Wendy Wu
 
@@ -14,9 +14,9 @@ December 6, 2024
 
 ## Introduction 
 
-Credit and trust are crucial to contemporary financial systems. A key metric for calculating and forecasting a debtor's default possibilities is credit risk. The accurate assessment of credit risk is significant for the entire system. Sometimes just a small enhancement to the evaluation system can undo a huge amount of losses [^1] while systemic failures such as the 2008 sub-prime crisis can result from inaccurate credit risk assessment. Therefore, in order to create suitable lending strategies that reduce their risks, lenders dedicate significant efforts to predicting the creditworthiness of businesses and customers. In the past, statistical techniques like logistic regression and linear discriminant analysis have been used in credit risk assessments [^2]. However, these strategies are not well-suited to large datasets.
+Credit and trust are crucial to contemporary financial systems. A key metric for calculating and forecasting a debtor's default possibilities is credit risk. The accurate assessment of credit risk is significant for the entire system. Sometimes just a small enhancement to the evaluation system can undo a huge amount of losses [^2] while systemic failures such as the 2008 sub-prime crisis can result from inaccurate credit risk assessment. Therefore, in order to create suitable lending strategies that reduce their risks, lenders dedicate significant efforts to predicting the creditworthiness of businesses and customers. In the past, statistical techniques like logistic regression and linear discriminant analysis have been used in credit risk assessments [^3]. However, these strategies are not well-suited to large datasets.
 
-With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as decision trees, vector machines, and K-means are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data of the lenders, which can help financial institutions quickly screen out high-quality customers and identify potential high-risk customers at the same time, and this is the topic I seek to explore in this paper.
+With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as `decision trees`, `surport vector machines`, and `K-means clustering` are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data of the lenders and identify the potential high-risk customers, and this is the topic I seek to explore in this paper.
 
 ## Data
 The `German Credit dataset` used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes prepared by Prof. Hofmann which is publicly available at the [University of California, Irvine (UCI) Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data). In this dataset, each entry represents a person who takes a credit by a bank. Each person is classified as good or bad credit risks according to the set of attributes. The link to the original dataset can be found below. 
@@ -177,22 +177,22 @@ weighted avg       0.76      0.76      0.76       300
 #### Figure 5: Confusion Matrix for XGboost Model
 
 ### ROC Curves
-Random Forest achieves the highest AUC (0.80), indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
 
 ![](assets/IMG/ROC.png)
 #### Figure 6: ROC Curves for Rdige regression, Random Forest and XGboost Models
 
+We can see from Figure 6 that the ROC curve for Random Forest is closest to the upper left corner, indicating the best predictive performance of the model. Meanwhile, the Random Forest model achieves the highest AUC (0.80), indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
 
 ## Discussion
 The evaluation of three different models—Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
 
-* `Ridge Regression` is a simple, interpretable model but lacks the capacity to handle non-linearities or complex patterns in the data.
+* `Ridge Regression` is a simple, interpretable model but lacks the capacity to handle non-linearities or complex patterns in the data. 
 
 * `Random Forest` strikes a balance between simplicity and performance, excelling in capturing feature interactions.
 
 * `XGBoost`, while currently underperforming, has the potential to outperform with proper tuning and is often favored for large-scale, high-dimensional datasets.
 
-All models show difficulties in predicting the minority class, particularly Ridge Regression. While Random Forest and XGBoost perform better, additional techniques like SMOTE (Synthetic Minority Oversampling Technique) or hyperparameter tuning (e.g., scale_pos_weight) could further improve results.
+All models show difficulties in predicting the minority class, particularly Ridge Regression. The confusion matrix and classification report suggest that while the models perform well overall, there are still misclassifications, particularly with false positives and false negatives. While Random Forest and XGBoost perform better, additional techniques like SMOTE (Synthetic Minority Oversampling Technique) or hyperparameter tuning (e.g., scale_pos_weight) could further improve results.
 
 
 
@@ -200,10 +200,12 @@ All models show difficulties in predicting the minority class, particularly Ridg
 
 In this analysis, we employed various machine learning models to predict credit risk based on the German Credit Risk dataset.
 
-Random Forest emerges as the best-performing model based on the current results, with the highest AUC and balanced metrics for both classes. However, XGBoost has the potential to surpass Random Forest with optimized hyperparameters, especially for imbalanced datasets. Ridge Regression, while underperforming in this context, remains a viable baseline model due to its simplicity and interpretability. Future work should focus on addressing class imbalance and exploring advanced boosting techniques to improve minority class performance further.
+`Random Forest` emerges as the best-performing model based on the current results, with the highest AUC and balanced metrics for both classes. However, `XGBoost` has the potential to surpass Random Forest with optimized hyperparameters, especially for imbalanced datasets. `Ridge Regression`, while underperforming in this context, remains a viable baseline model due to its simplicity and interpretability. Future work should focus on addressing class imbalance and exploring advanced boosting techniques to improve minority class performance further.
 
 ## References
-[^1]: [Pandey, T. N., Jagadev, A. K., Mohapatra, S. K., & Dehuri, S. (2017, August). Credit risk analysis using machine learning classifiers. In 2017 International Conference on Energy, Communication, Data Analytics and Soft Computing (ICECDS) (pp. 1850-1854). IEEE.]
+[^1]: [Ghatasheh, N. (2014). Business analytics using random forest trees for credit risk prediction: a comparison study. International Journal of Advanced Science and Technology, 72(2014), 19-30.]
 
-[^2]: [Shi, S., Tse, R., Luo, W., D’Addona, S., & Pau, G. (2022). Machine learning-driven credit risk: a systemic review. Neural Computing and Applications, 34(17), 14327-14339.]
+[^2]: [Pandey, T. N., Jagadev, A. K., Mohapatra, S. K., & Dehuri, S. (2017, August). Credit risk analysis using machine learning classifiers. In 2017 International Conference on Energy, Communication, Data Analytics and Soft Computing (ICECDS) (pp. 1850-1854). IEEE.]
+
+[^3]: [Shi, S., Tse, R., Luo, W., D’Addona, S., & Pau, G. (2022). Machine learning-driven credit risk: a systemic review. Neural Computing and Applications, 34(17), 14327-14339.]
 
