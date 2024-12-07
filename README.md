@@ -14,12 +14,12 @@ December 6, 2024
 
 ## Introduction 
 
-Credit and trust are crucial to contemporary financial systems. A key metric for calculating and forecasting a debtor's default possibilities is credit risk. The accurate assessment of credit risk is significant for the entire system. Sometimes just a small enhancement to the evaluation system can undo a huge amount of losses [^1] while systemic failures such as the 2008 sub-prime crisis can result from inaccurate credit risk assessment. Therefore, in order to create suitable lending strategies that reduce their risks, lenders dedicate significant efforts to predicting the creditworthiness of businesses and customers. In the past, statistical techniques like logistic regression and linear discriminant analysis have been used in credit risk assessments [^2]. However, these strategies are not well-suited to large datasets.
+Credit and trust are crucial to contemporary financial systems. A key metric for calculating and forecasting a debtor's default possibilities is credit risk. The accurate assessment of credit risk is significant for the entire system. Sometimes, even a small improvement in an evaluation system can prevent significant losses, whereas systemic failures, such as the 2008 sub-prime crisis[^1], can result from inaccuracies in credit risk assessment. Therefore, in order to create suitable lending strategies that reduce their risks, lenders dedicate significant efforts to predicting the creditworthiness of businesses and customers. In the past, statistical techniques like logistic regression and linear discriminant analysis have been used in credit risk assessments [^2]. However, these strategies are not well-suited to large datasets.
 
-With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as `Decision Trees`, `Surport Vector Machines`, and `K-means clustering` are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data of the lenders and identify the potential high-risk customers, and this is the topic I seek to explore in this paper.
+With the rapid development of Artificial Intelligence (AI) technology, its application in the financial field is becoming more and more widespread, especially in credit risk management. Common machine learning techniques such as `Decision Trees`, `Surport Vector Machines`, and `K-means clustering` are more efficient and flexible than statistical methods. They can help quickly analyze multi-dimensional data and identify the potential high-risk customers, and this is the topic I seek to explore in this paper.
 
 ## Data
-The `German Credit dataset` used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes which is publicly available at the [University of California, Irvine (UCI) Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data). In this dataset, each entry represents a person who takes a credit by a bank. Each person is classified as good or bad credit risks according to the set of attributes. 
+The `German Credit dataset` used in my project is prepared by Prof. Hofmann. The original dataset contains 1000 entries with 20 categorial/numeric attributes which is publicly available at the [University of California, Irvine (UCI) Machine Learning Repository](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data). In this dataset, each entry represents a person who takes a credit by the bank. Each person is classified as good or bad credit risks according to the set of attributes. 
 Here I used an adaption of the dataset from [Kaggle](https://www.kaggle.com/datasets/uciml/german-credit/data) which contains 1000 entries with 10 categorial/numeric attributes (see Table 1). It is worth mentioning that the dataset has a 7:3 ratio of good credit to bad credit of `Risk` attribute.
 
 ![](assets/IMG/form.png)
@@ -49,12 +49,12 @@ Here is a detalied description of the attributes in each column:
 ![](assets/IMG/purpose.png)
 #### Figure 1: Distribution of all the Variables in the Dataset
 
-Before putting the attributes into the models, I did some data processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the NaN values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
+Before putting the attributes into the models, I did some data processing. To handle the missing values in the two variables `Saving account` and `Checking account`, I replace the `NaN` values with `unkown` value. For the categorical variables, I encode them into numerical formats. 
 
 
 ## Modelling
 
-I used three different machine learning approaches: `Ridge regression`, `Random Forest` and `XGBoost(eXtreme Gradient Boosting) algorithm` to evaluate the lenders' credit risks. 
+I used three different machine learning approaches: `Ridge regression`, `Random Forest` and `XGBoost(eXtreme Gradient Boosting) algorithm` to evaluate the credit risks. 
 
 #### Ridge regression Model
 ```python
@@ -81,7 +81,7 @@ model_xgb.fit(X_train, y_train)
 y_pred_xgb = model_xgb.predict(X_test)
 ```
 
-Meanwhile, I evaluated the three models' performance using accuracy, confusion matrix, and classification report. This step is essential for understanding how well these models are predicting credit risk and identifying areas for improvement.
+Meanwhile, I evaluated the three models' performance by using accuracy, confusion matrix, and classification report. This step is essential for understanding how well these models are predicting credit risk and identifying areas for improvement.
 
 ```python
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
@@ -99,7 +99,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`F1-Score`: Harmonic mean of precision and recall, useful for evaluating imbalanced datasets.
 
 
-## Results
+## Results and Discussion
 ### Ridge regression Model
 First, I ran the Ridge regression model, obtaining a test accuracy of 70.67%. Below is the classification report along with the confusion matrix for this model (Figure 2):
 ```python
@@ -177,7 +177,7 @@ weighted avg       0.76      0.76      0.76       300
 
 #### Figure 5: Confusion Matrix for XGboost Model
 
-While XGBoost achieves solid results, it still struggles with the minority class (1). Therefore, I also tried to implement `hyperparameter tuning` for XGBoost model to optimize performance. I used tools like `GridSearchCV` from sklearn and experiment with parameters like` max_depth`, `learning_rate`, `n_estimators`, and `scale_pos_weight` to to balance the focus on minority classes.
+While XGBoost achieves solid results, it still struggles with the minority class (1). Therefore, I tried to implement `hyperparameter tuning` for XGBoost model to optimize performance. I used tools like `GridSearchCV` from sklearn and experiment with parameters like` max_depth`, `learning_rate`, `n_estimators`, and `scale_pos_weight` to to balance the focus on minority classes.
 
 But unforturnatly, the results didn't show a significant improvement.
 
@@ -207,24 +207,18 @@ Confusion Matrix:
 
 We can see from Figure 6 that the ROC curve for Random Forest is closest to the upper left corner, indicating the best predictive performance of the model. Meanwhile, the Random Forest model achieves the highest `AUC (0.80)`, indicating superior overall performance in distinguishing between good and bad credit cases. Ridge Regression and XGBoost trail behind, with AUC values of 0.72 and 0.71, respectively.
 
-## Discussion
-The evaluation of three different models----Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
+## Conclusion
 
-* `Ridge Regression` is a simple, interpretable model but lacks the capacity to handle non-linearities or complex patterns in the data. 
+In this analysis, we employed various machine learning models to predict credit risk based on the German Credit Risk dataset. The evaluation of three different models----Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
 
-* `Random Forest` strikes a balance between simplicity and performance, excelling in capturing feature interactions.
+* `Ridge Regression` is a simple, interpretable model which performs well for pridicting creidt risk, but it lacks the capacity to handle non-linearities or complex patterns in the data. 
+
+* `Random Forest` performs best with the highest accuracy of 76.3%. It strikes a balance between simplicity and performance, excelling in capturing feature interactions.
 
 * `XGBoost`, while currently underperforming, has the potential to outperform with proper tuning and is often favored for large-scale, high-dimensional datasets.
 
 All models show difficulties in predicting the minority class, particularly Ridge Regression. The confusion matrix and classification report suggest that while the models perform well overall, there are still misclassifications, particularly with false positives and false negatives. 
-
-
-
-## Conclusion
-
-In this analysis, we employed various machine learning models to predict credit risk based on the German Credit Risk dataset.
-
-`Random Forest` emerges as the best-performing model based on the current results, with the highest AUC and balanced metrics for both classes. `XGBoost` achieved similar accuracy to Random Forest Model. `Ridge Regression`, while underperforming in this context, remains a viable baseline model due to its simplicity and interpretability. While Random Forest and XGBoost perform better, additional techniques like SMOTE (Synthetic Minority Oversampling Technique) could further improve results. Future work should focus on addressing class imbalance and exploring advanced boosting techniques to improve minority class performance further.
+`Random Forest` emerges as the best-performing model based on the current results, with the highest AUC and balanced metrics for both classes. `XGBoost` achieved similar accuracy to Random Forest Model. `Ridge Regression` remains a viable baseline model due to its simplicity and interpretability. While Random Forest and XGBoost perform better, additional techniques like SMOTE (Synthetic Minority Oversampling Technique) could further improve results. Future work should focus on addressing class imbalance and exploring advanced boosting techniques to improve minority class performance further.
 
 ## References
 
