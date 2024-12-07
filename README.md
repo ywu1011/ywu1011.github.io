@@ -209,7 +209,7 @@ We can see from Figure 6 that the ROC curve for Random Forest is closest to the 
 
 ## Conclusion
 
-In this analysis, we employed various machine learning models to predict credit risk based on the German Credit Risk dataset. The evaluation of three different models----Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
+In this analysis, I employed various machine learning models to predict credit risk based on the German Credit Risk dataset. The evaluation of three different models----Ridge Regression, Random Forest, and XGBoost—provides valuable insights into their strengths and limitations in predicting credit risk (good vs. bad credit). 
 
 * `Ridge Regression` is a simple, interpretable model which performs well for pridicting creidt risk, but it lacks the capacity to handle non-linearities or complex patterns in the data. 
 
